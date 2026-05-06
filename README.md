@@ -54,3 +54,28 @@ Faithfulness only checks whether claims are grounded, it doesn't check whether t
 Always, but especially in high-stakes domains like legal, medical, financial, or compliance systems where hallucinated content has real consequences.
  
 ---
+
+### Answer Relevancy: *did the model actually answer what was asked?*
+ 
+**What it measures:**
+Whether the generated answer directly addresses the user's question. A highly relevant answer is focused, complete, and on-topic. A low-relevancy answer might be faithful to the context but tangential to the actual question.
+ 
+**How it works:**
+The answer is used to generate multiple reverse questions: *"What question would this answer be responding to?"* These reverse questions are then compared to the original question using embedding similarity. High similarity means the answer is on-topic, low similarity means the answer drifted.
+ 
+```
+Answer Relevancy = mean(cosine_similarity(reverse_question_i, original_question))
+```
+ 
+**Score range:** 0.0 to 1.0. Higher is better.
+ 
+**What a low score means:**
+The model retrieved something related but not quite right, and generated an answer that technically uses the context but doesn't address what the user actually wanted. Common in vague queries or when the retriever pulls adjacent-but-not-relevant chunks.
+ 
+**Where this metric fails:**
+Answer relevancy doesn't penalize incomplete answers, meaning, an answer that correctly addresses part of the question but misses half of it can still score well. It measures topical alignment, not completeness. Pair it with context recall to catch this gap.
+ 
+**When to prioritize it:**
+When your users are asking complex or multi-part questions. Low answer relevancy often points to a retrieval problem that the right documents aren't being surfaced.
+ 
+---
