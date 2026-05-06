@@ -23,3 +23,34 @@ Evaluation solves this by giving you **quantitative signals** that answer the qu
 These aren't academic questions. They're the difference between a RAG system that works and one that quietly erodes user trust.
  
 ---
+
+## What this framework measures
+ 
+There are four fundamental failure modes in a RAG pipeline: **Faithfulness, Answer Relevancy, Context Precision** and **Context Recall**. Each maps to a metric.
+ 
+---
+ 
+### Faithfulness: *did the model make things up?*
+ 
+**What it measures:**
+Whether every claim in the generated answer is actually supported by the retrieved context. A faithful answer contains only information that can be directly traced back to what was retrieved, nothing more.
+ 
+**How it works:**
+The answer is decomposed into atomic claims, i.e. individual factual statements. Each claim is then checked against the retrieved chunks using an LLM call: *"Is this claim supported by the following context?"* The faithfulness score is the fraction of claims that pass this check.
+ 
+```
+Faithfulness = (number of claims supported by context) / (total claims in answer)
+```
+ 
+**Score range:** 0.0 to 1.0. Higher is better.
+ 
+**What a low score means:**
+The model is hallucinating: generating content that isn't in the retrieved context. This is the most dangerous failure mode. A faithfulness score below 0.7 in production means your users are receiving fabricated information presented as fact.
+ 
+**Where this metric fails:**
+Faithfulness only checks whether claims are grounded, it doesn't check whether the retrieved context itself is accurate. If your knowledge base contains incorrect information, a perfectly faithful answer can still be wrong. Faithfulness measures retrieval-generation alignment, not factual correctness against the real world.
+ 
+**When to prioritize it:**
+Always, but especially in high-stakes domains like legal, medical, financial, or compliance systems where hallucinated content has real consequences.
+ 
+---
