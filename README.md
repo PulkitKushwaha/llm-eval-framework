@@ -129,3 +129,22 @@ Context recall requires ground truth answers. You need to know what the correct 
 When users report that the system "doesn't know" things that should be in the knowledge base. Low context recall is almost always a retrieval problem i.e. chunking strategy, embedding model, or top-k settings.
  
 ---
+
+## The metric matrix: reading your scores together
+ 
+We have selected 4 evaluation metrics, as no single metric tells the full story, always remember this. It is the combination of those metrics that give the bigger picture of what is exactly going on. Co-relating these answers is what gives more insights about the current system performance. Here's how to interpret combinations:
+ 
+| Faithfulness | Answer Relevancy | Context Precision | Context Recall | Diagnosis |
+|---|---|---|---|---|
+| ✅ High | ✅ High | ✅ High | ✅ High | Pipeline is working well |
+| ❌ Low | ✅ High | ✅ High | ✅ High | LLM is hallucinating despite good retrieval |
+| ✅ High | ❌ Low | ✅ High | ✅ High | Answers are grounded but off-topic: prompt issue |
+| ✅ High | ✅ High | ❌ Low | ✅ High | Retriever returning noise: embedding or chunking issue |
+| ✅ High | ✅ High | ✅ High | ❌ Low | Retriever missing chunks: top-k or chunk size issue |
+| ❌ Low | ❌ Low | ❌ Low | ❌ Low | Fundamental retrieval failure: start troubleshooting with chunking |
+| ✅ High | ❌ Low | ❌ Low | ❌ Low | LLM is faithful to bad context: retrieval is the problem |
+
+
+I hope this example gives you an idea of how to analyse and derive insights from the metrics we have been calculating.
+ 
+---
