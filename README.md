@@ -148,3 +148,24 @@ We have selected 4 evaluation metrics, as no single metric tells the full story,
 I hope this example gives you an idea of how to analyse and derive insights from the metrics we have been calculating.
  
 ---
+
+## RAGAS vs custom metrics: when to use each
+ 
+This framework supports both. Here's when to reach for each:
+ 
+**Use RAGAS when:**
+- You want a battle-tested, well-documented baseline
+- You're evaluating a general-purpose RAG pipeline
+- You want to compare your pipeline against published benchmarks
+- Speed of setup matters more than customization
+**Use custom metrics when:**
+- Your domain has specific requirements RAGAS doesn't cover (e.g. citation accuracy, policy compliance, structured output correctness)
+- You need to evaluate aspects of your pipeline that aren't retrieval or generation quality i.e. latency, cost, format adherence
+- You want full control over the LLM used for evaluation
+- You're building evaluation into a CI/CD pipeline and need deterministic, lightweight checks
+**Use both when:**
+- You want RAGAS scores for benchmarking and comparison
+- Plus custom metrics for domain-specific requirements
+- This framework lets you mix them in the same evaluation run
+
+---
