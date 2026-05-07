@@ -250,3 +250,35 @@ python -m llm_eval \
 ```
 
 ---
+
+## Design principles
+ 
+**Pipeline-agnostic:** Works with any RAG implementation, be it LangChain, LlamaIndex, Haystack, or custom. As long as you can produce (question, answer, contexts, ground_truth) tuples, the evaluator works.
+ 
+**Metric-agnostic:** Built-in metrics, RAGAS metrics, and custom metrics all run through the same interface. Mix and match freely.
+ 
+**CI/CD friendly:** JSON output format is designed to be consumed by GitHub Actions, Jenkins, or any CI pipeline. Run evals on every PR, catch regressions before they reach production.
+ 
+**Honest about limitations:** Every metric in this framework has documented failure modes. Evaluation is not a solved problem. This framework helps you measure, but it can't replace domain expertise and human judgment for high-stakes decisions.
+ 
+---
+ 
+## Status
+ 
+| Component | Status |
+|---|---|
+| Base metric interface + data models | In progress |
+| Faithfulness metric | Coming soon |
+| Answer relevancy metric | Coming soon |
+| Context precision metric | Coming soon |
+| Context recall metric | Coming soon |
+| RAGAS integration wrapper | Coming soon |
+| JSON + Markdown reporters | Coming soon |
+| CLI interface | Coming soon |
+| Reference implementation (RAG pipeline eval) | Coming soon |
+| GitHub Actions CI/CD workflow | Coming soon |
+ 
+---
+ 
+*Part of the [ai-engineering-portfolio](https://github.com/pulkitkushwaha/ai-engineering-portfolio) — built by [Pulkit Kushwaha](https://linkedin.com/in/pulkit-kushwaha)*
+ 
