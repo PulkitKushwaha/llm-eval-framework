@@ -169,3 +169,31 @@ This framework supports both. Here's when to reach for each:
 - This framework lets you mix them in the same evaluation run
 
 ---
+
+## What this library provides
+ 
+```
+llm-eval-framework/
+├── llm_eval/
+│   ├── evaluator.py        # Unified Evaluator class: runs any combination of metrics
+│   ├── models.py           # EvalSample, MetricResult, EvalReport data models
+│   ├── base.py             # BaseMetric abstract class: extend to add custom metrics
+│   ├── metrics/
+│   │   ├── faithfulness.py         # Faithfulness metric implementation
+│   │   ├── answer_relevancy.py     # Answer relevancy metric implementation
+│   │   ├── context_precision.py    # Context precision metric implementation
+│   │   ├── context_recall.py       # Context recall metric implementation
+│   │   └── ragas_wrapper.py        # RAGAS integration wrapper
+│   ├── reporters/
+│   │   ├── json_reporter.py        # Machine-readable JSON output
+│   │   └── markdown_reporter.py    # Human-readable markdown tables
+│   └── cli.py              # CLI interface
+├── examples/
+│   └── rag_pipeline_eval/  # Reference implementation: evaluating a real RAG pipeline
+│       ├── dataset/        # 30 curated test questions with ground truth
+│       ├── results/        # Baseline and post-optimization eval results
+│       └── notebooks/      # Chunking strategy comparison and failure analysis
+└── tests/                  # Unit tests for all metrics
+```
+ 
+---
