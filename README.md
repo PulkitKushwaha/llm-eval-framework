@@ -30,7 +30,7 @@ There are four fundamental failure modes in a RAG pipeline: **Faithfulness, Answ
  
 ---
  
-### Faithfulness: *did the model make things up?*
+### 1. Faithfulness: *did the model make things up?*
  
 **What it measures:**
 Whether every claim in the generated answer is actually supported by the retrieved context. A faithful answer contains only information that can be directly traced back to what was retrieved, nothing more.
@@ -55,7 +55,7 @@ Always, but especially in high-stakes domains like legal, medical, financial, or
  
 ---
 
-### Answer Relevancy: *did the model actually answer what was asked?*
+### 2. Answer Relevancy: *did the model actually answer what was asked?*
  
 **What it measures:**
 Whether the generated answer directly addresses the user's question. A highly relevant answer is focused, complete, and on-topic. A low-relevancy answer might be faithful to the context but tangential to the actual question.
@@ -77,5 +77,55 @@ Answer relevancy doesn't penalize incomplete answers, meaning, an answer that co
  
 **When to prioritize it:**
 When your users are asking complex or multi-part questions. Low answer relevancy often points to a retrieval problem that the right documents aren't being surfaced.
+ 
+---
+
+### 3. Context Precision: *is your retriever finding signal or noise?*
+ 
+**What it measures:**
+Whether the retrieved chunks are actually relevant to the question. High context precision means your retriever is doing a good job: it's returning content that's useful for answering the question. Low precision means you're flooding the context window with irrelevant content.
+ 
+**How it works:**
+Each retrieved chunk is evaluated for relevance to the question: *"Is this chunk useful for answering this question?"* Context precision is the fraction of retrieved chunks that are relevant, weighted by their position (chunks ranked higher should be more relevant).
+ 
+```
+Context Precision = weighted mean of relevance scores across retrieved chunks
+```
+ 
+**Score range:** 0.0 to 1.0. Higher is better.
+ 
+**What a low score means:**
+Your retriever is returning chunks that look semantically similar to the query but don't actually contain the information needed to answer it. This wastes context window space, increases token costs, and confuses the LLM, often times leading to hallucination or irrelevant answers.
+ 
+**Where this metric fails:**
+Context precision only evaluates the chunks you retrieved. It has no visibility into what you didn't retrieve. A retriever that returns 3 perfectly relevant chunks out of 3 scores 1.0, even if there were 10 other relevant chunks it missed entirely. That's context recall's job.
+ 
+**When to prioritize it:**
+When you're debugging retrieval quality. Especially if faithfulness is high but answer relevancy is low. Low context precision often points to embedding model quality or chunking strategy problems.
+ 
+---
+
+### 4. Context Recall: *is your retriever missing critical information?*
+ 
+**What it measures:**
+Whether all the information needed to answer the question correctly was present in the retrieved chunks. High recall means your retriever found everything while low recall means it missed chunks that contained critical information.
+ 
+**How it works:**
+The ground truth answer is decomposed into atomic statements. Each statement is checked against the retrieved context: *"Can this statement be attributed to the retrieved chunks?"* Context recall is the fraction of ground truth statements that can be found in the retrieved context.
+ 
+```
+Context Recall = (ground truth statements found in context) / (total ground truth statements)
+```
+ 
+**Score range:** 0.0 to 1.0. Higher is better.
+ 
+**What a low score means:**
+Your retriever is missing relevant chunks. The information exists in your knowledge base, but your retrieval strategy isn't finding it. Common causes: chunk size too small, embedding model not capturing semantic meaning well, top-k too low, or poor document structure causing relevant content to be split across chunks.
+ 
+**Where this metric fails:**
+Context recall requires ground truth answers. You need to know what the correct answer should be before you can measure whether the context contains it. This makes it more expensive to evaluate at scale. It also can't tell you whether the missed information was in your knowledge base at all. I can only tell whether it was in what you retrieved.
+ 
+**When to prioritize it:**
+When users report that the system "doesn't know" things that should be in the knowledge base. Low context recall is almost always a retrieval problem i.e. chunking strategy, embedding model, or top-k settings.
  
 ---
