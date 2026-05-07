@@ -197,3 +197,56 @@ llm-eval-framework/
 ```
  
 ---
+
+## Usage preview
+ 
+**Python API:**
+```python
+from llm_eval import Evaluator
+from llm_eval.metrics import Faithfulness, AnswerRelevancy, ContextPrecision, ContextRecall
+from llm_eval.models import EvalSample
+ 
+# Define your test samples
+samples = [
+    EvalSample(
+        question="What is the return policy for online orders?",
+        answer="Online orders can be returned within 30 days of purchase.",
+        contexts=["Our return policy allows returns within 30 days for all purchases."],
+        ground_truth="Items purchased online can be returned within 30 days."
+    )
+]
+ 
+# Run evaluation
+evaluator = Evaluator(
+    metrics=[Faithfulness(), AnswerRelevancy(), ContextPrecision(), ContextRecall()]
+)
+report = evaluator.evaluate(samples)
+print(report.summary())
+```
+ 
+**CLI:**
+```bash
+python -m llm_eval \
+  --dataset examples/rag_pipeline_eval/dataset/test_questions.json \
+  --metrics faithfulness,answer_relevancy,context_precision,context_recall \
+  --output markdown
+```
+ 
+**Expected output:**
+```
+╔══════════════════════════════════════════════════════╗
+║           LLM Evaluation Report                      ║
+╠══════════════════════════════════════════════════════╣
+║ Samples evaluated:     30                            ║
+║ Metrics run:           4                             ║
+╠══════════════════════════════════════════════════════╣
+║ Faithfulness           0.87              Good        ║
+║ Answer Relevancy       0.91              Excellent   ║
+║ Context Precision      0.76              Moderate    ║
+║ Context Recall         0.82              Good        ║
+╠══════════════════════════════════════════════════════╣
+║ Overall Score          0.84              Good        ║
+╚══════════════════════════════════════════════════════╝
+```
+
+---
