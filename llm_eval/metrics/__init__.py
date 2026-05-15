@@ -2,5 +2,6 @@
 
 from llm_eval.metrics.faithfulness import Faithfulness
 from llm_eval.metrics.answer_relevancy import AnswerRelevancy
+from llm_eval.metrics.context_precision import ContextPrecision
  
-__all__ = ["Faithfulness", "AnswerRelevancy"]
+__all__ = ["Faithfulness", "AnswerRelevancy", "ContextPrecision"]
