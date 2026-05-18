@@ -1,0 +1,272 @@
+[
+  {
+    "id": "q001",
+    "category": "factual",
+    "question": "What is the return policy for online orders?",
+    "ground_truth": "Online orders can be returned within 30 days of purchase. Items must be unused and in original packaging. Refunds are processed within 5-7 business days.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Simple factual lookup — tests basic retrieval precision"
+  },
+  {
+    "id": "q002",
+    "category": "factual",
+    "question": "What are the standard shipping timeframes?",
+    "ground_truth": "Standard shipping takes 5-7 business days. Express shipping takes 2-3 business days. Same-day delivery is available in select cities.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Multi-value factual — tests whether all values are retrieved"
+  },
+  {
+    "id": "q003",
+    "category": "factual",
+    "question": "What payment methods are accepted?",
+    "ground_truth": "We accept Visa, Mastercard, American Express, PayPal, and bank transfers. Cryptocurrency payments are not accepted.",
+    "answer": "",
+    "contexts": [],
+    "notes": "List retrieval — tests context recall for enumerated facts"
+  },
+  {
+    "id": "q004",
+    "category": "factual",
+    "question": "What is the warranty period for electronics?",
+    "ground_truth": "Electronics come with a 1-year manufacturer warranty. Extended warranty plans of 2 or 3 years are available for purchase at checkout.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Conditional factual — tests retrieval of related conditions"
+  },
+  {
+    "id": "q005",
+    "category": "factual",
+    "question": "How do I track my order?",
+    "ground_truth": "Orders can be tracked via the order confirmation email which contains a tracking link. Alternatively, log into your account and visit the Orders section. Tracking updates every 24 hours.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Procedural factual — tests multi-step instruction retrieval"
+  },
+  {
+    "id": "q006",
+    "category": "multi_hop",
+    "question": "If I order today using express shipping, when will my order arrive, and what happens if I need to return it?",
+    "ground_truth": "With express shipping (2-3 business days), an order placed today would arrive in 2-3 business days. If you need to return it, you have 30 days from purchase to initiate a return. Items must be unused and in original packaging.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Multi-hop — requires combining shipping and return policy information"
+  },
+  {
+    "id": "q007",
+    "category": "multi_hop",
+    "question": "Can I get a refund if my product arrives damaged and what documentation do I need?",
+    "ground_truth": "Yes, damaged products qualify for a full refund. You need to provide photos of the damage, the order number, and submit a claim within 48 hours of delivery. Refunds are processed within 5-7 business days.",
+    "answer": "",
+    "contexts": [],
+  "notes": "Multi-hop: combines damage policy, documentation requirements, and refund timeline"
+  },
+  {
+    "id": "q008",
+    "category": "multi_hop",
+    "question": "What is the total cost for purchasing a $500 item with express shipping and extended warranty?",
+    "ground_truth": "A $500 item with express shipping ($15) and a 2-year extended warranty ($49) would total $564. Sales tax is calculated at checkout based on delivery address.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Multi-hop calculation: requires combining pricing from multiple sections"
+  },
+  {
+    "id": "q009",
+    "category": "multi_hop",
+    "question": "I am an international customer. What shipping options and payment methods are available to me?",
+    "ground_truth": "International customers can use standard international shipping (10-14 business days) or express international (5-7 business days). Available payment methods for international orders are Visa, Mastercard, and PayPal. Bank transfers are not available for international orders.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Multi-hop: requires combining international shipping and payment restriction info"
+  },
+  {
+    "id": "q010",
+    "category": "multi_hop",
+    "question": "How does the loyalty program affect my return policy and shipping costs?",
+    "ground_truth": "Loyalty program members at Gold tier and above receive an extended return window of 60 days instead of 30. All loyalty members receive free standard shipping on orders over $50. Platinum members receive free express shipping on all orders.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Multi-hop: loyalty program interactions with return and shipping policies"
+  },
+  {
+    "id": "q011",
+    "category": "summarization",
+    "question": "Summarize the complete returns and refunds process.",
+    "ground_truth": "The returns process involves initiating a return within 30 days of purchase, ensuring items are unused and in original packaging, completing the online return form, shipping the item back using the provided label, and receiving a refund within 5-7 business days to the original payment method.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Summarization: tests whether pipeline synthesizes multi-section content coherently"
+  },
+  {
+    "id": "q012",
+    "category": "summarization",
+    "question": "What are all the ways I can contact customer support?",
+    "ground_truth": "Customer support is available via live chat (9am-6pm weekdays), email (24-48 hour response time), phone (1-800-SUPPORT, 9am-5pm weekdays), and the help center at support.company.com for self-service.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Summarization: aggregates contact channels from multiple sections"
+  },
+  {
+    "id": "q013",
+    "category": "summarization",
+    "question": "Describe all available membership tiers and their benefits.",
+    "ground_truth": "There are three tiers: Silver (free, 5% discount, standard shipping), Gold ($9.99/month, 10% discount, free standard shipping over $50, 60-day returns), and Platinum ($19.99/month, 15% discount, free express shipping, 90-day returns, dedicated support line).",
+    "answer": "",
+    "contexts": [],
+    "notes": "Summarization: complex multi-tier comparison requiring structured synthesis"
+  },
+  {
+    "id": "q014",
+    "category": "comparison",
+    "question": "What is the difference between standard and express shipping in terms of cost, speed, and tracking?",
+    "ground_truth": "Standard shipping costs $5.99 and takes 5-7 business days with basic tracking. Express shipping costs $14.99 and takes 2-3 business days with real-time tracking updates every 4 hours.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Comparison: requires retrieving and comparing attributes across two options"
+  },
+  {
+    "id": "q015",
+    "category": "comparison",
+    "question": "How does the return policy differ for sale items versus full-price items?",
+    "ground_truth": "Full-price items can be returned within 30 days for a full refund. Sale items can be exchanged within 14 days but are not eligible for cash refunds — only store credit is issued.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Comparison — policy differentiation test"
+  },
+  {
+    "id": "q016",
+    "category": "comparison",
+    "question": "Compare PayPal and credit card payments in terms of processing time and fees.",
+    "ground_truth": "Credit card payments are processed instantly with no additional fees. PayPal payments are processed within 1 business day and may incur a 2.9% processing fee for international transactions.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Comparison: technical attribute comparison across payment methods"
+  },
+  {
+    "id": "q017",
+    "category": "negative",
+    "question": "Do you offer same-day delivery to rural areas?",
+    "ground_truth": "Same-day delivery is only available in select major cities. Rural areas are not currently eligible for same-day delivery and must use standard or express shipping options.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Negative: tests whether pipeline correctly retrieves limiting conditions"
+  },
+  {
+    "id": "q018",
+    "category": "negative",
+    "question": "Can I return a digital product or software license?",
+    "ground_truth": "Digital products and software licenses are non-returnable once the download link has been accessed or the license key has been revealed. This policy is clearly stated at checkout before purchase.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Negative: exception to general return policy"
+  },
+  {
+    "id": "q019",
+    "category": "negative",
+    "question": "Is there a price match guarantee?",
+    "ground_truth": "We do not currently offer a price match guarantee. Prices are set based on our cost structure and cannot be adjusted to match competitor pricing.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Negative: tests handling of policy absence"
+  },
+  {
+    "id": "q020",
+    "category": "negative",
+    "question": "Can I use multiple discount codes on a single order?",
+    "ground_truth": "Only one discount code can be applied per order. Loyalty discounts and promotional codes cannot be combined. The higher-value discount is automatically applied if both are eligible.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Negative: restriction on combining benefits"
+  },
+  {
+    "id": "q021",
+    "category": "adversarial",
+    "question": "The website says free shipping on all orders — is that right?",
+    "ground_truth": "Free shipping is not available on all orders. Free standard shipping applies to orders over $50 for Gold members and above. Non-members pay shipping fees for all orders.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Adversarial: tests faithfulness when question contains false premise"
+  },
+  {
+    "id": "q022",
+    "category": "adversarial",
+    "question": "I heard returns are accepted up to 90 days — can you confirm?",
+    "ground_truth": "Standard returns are accepted within 30 days for non-members. 60 days for Gold members. 90 days only for Platinum members. The 90-day window is not the standard policy.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Adversarial: tests whether pipeline corrects false user assumption"
+  },
+  {
+    "id": "q023",
+    "category": "adversarial",
+    "question": "What is your policy on accepting returns without a receipt?",
+    "ground_truth": "A receipt or order confirmation is required for all returns. Returns without proof of purchase cannot be processed. Order confirmations are automatically emailed at time of purchase.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Adversarial: implied edge case test"
+  },
+  {
+    "id": "q024",
+    "category": "out_of_scope",
+    "question": "What is the capital of France?",
+    "ground_truth": "This question is outside the scope of the knowledge base which covers product, shipping, and return policies.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Out of scope: tests whether pipeline stays grounded or hallucinates"
+  },
+  {
+    "id": "q025",
+    "category": "out_of_scope",
+    "question": "Can you recommend a good Italian restaurant near me?",
+    "ground_truth": "This question is outside the scope of the knowledge base which covers product, shipping, and return policies.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Out of scope: tests refusal to answer irrelevant questions"
+  },
+  {
+    "id": "q026",
+    "category": "ambiguous",
+    "question": "How long does it take?",
+    "ground_truth": "This question is ambiguous. Shipping takes 5-7 days standard or 2-3 days express. Return processing takes 5-7 business days. Order processing takes 1-2 business days before shipping.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Ambiguous: tests how pipeline handles underspecified queries"
+  },
+  {
+    "id": "q027",
+    "category": "ambiguous",
+    "question": "What is the fee?",
+    "ground_truth": "Multiple fees apply depending on context: shipping fees range from $5.99 to $14.99. Return shipping is free for defective items, $5.99 for voluntary returns. Late payment fees are 2% per month.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Ambiguous: tests disambiguation and comprehensive retrieval"
+  },
+  {
+    "id": "q028",
+    "category": "technical",
+    "question": "What encryption is used for payment processing?",
+    "ground_truth": "All payment data is encrypted using TLS 1.3 during transmission. Card data is tokenized and we are PCI-DSS Level 1 compliant. We do not store full card numbers on our servers.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Technical: tests retrieval of security-specific content"
+  },
+  {
+    "id": "q029",
+    "category": "technical",
+    "question": "What API integrations are available for enterprise customers?",
+    "ground_truth": "Enterprise customers have access to REST APIs for order management, inventory queries, and bulk pricing. API documentation is available at api.company.com. Rate limits are 1000 requests per minute for enterprise tier.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Technical: tests retrieval from technical documentation sections"
+  },
+  {
+    "id": "q030",
+    "category": "technical",
+    "question": "How does the recommendation engine work?",
+    "ground_truth": "The recommendation engine uses collaborative filtering based on purchase history and browsing behavior. It updates recommendations every 24 hours. Users can opt out of personalized recommendations in account settings.",
+    "answer": "",
+    "contexts": [],
+    "notes": "Technical: tests retrieval from product feature documentation"
+  }
+]
