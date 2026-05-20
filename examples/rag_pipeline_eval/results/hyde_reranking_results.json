@@ -1,0 +1,118 @@
+{
+  "run_id": "optimized_20240318_091544",
+  "timestamp": "2024-03-18T09:15:44",
+  "pipeline_config": {
+    "chunking_strategy": "sentence_window",
+    "window_size": 2,
+    "retrieval_strategy": "hyde_with_reranking",
+    "hyde_n_hypotheses": 1,
+    "reranker": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "retrieval_k": 20,
+    "reranking_top_k": 5,
+    "embedding_model": "text-embedding-3-small",
+    "llm_model": "gpt-4"
+  },
+  "summary": {
+    "num_samples": 30,
+    "metrics_evaluated": [
+      "faithfulness",
+      "answer_relevancy",
+      "context_precision",
+      "context_recall"
+    ],
+    "overall_score": 0.8156,
+    "metric_averages": {
+      "faithfulness": 0.8534,
+      "answer_relevancy": 0.8312,
+      "context_precision": 0.7989,
+      "context_recall": 0.7789
+    },
+    "passed": {
+      "faithfulness": true,
+      "answer_relevancy": true,
+      "context_precision": true,
+      "context_recall": true
+    }
+  },
+  "per_category_scores": {
+    "factual": {
+      "faithfulness": 0.9456,
+      "answer_relevancy": 0.9234,
+      "context_precision": 0.9012,
+      "context_recall": 0.9123,
+      "sample_count": 5
+    },
+    "multi_hop": {
+      "faithfulness": 0.8123,
+      "answer_relevancy": 0.7934,
+      "context_precision": 0.7456,
+      "context_recall": 0.7234,
+      "sample_count": 5
+    },
+    "summarization": {
+      "faithfulness": 0.8789,
+      "answer_relevancy": 0.8512,
+      "context_precision": 0.8123,
+      "context_recall": 0.7890,
+      "sample_count": 3
+    },
+    "comparison": {
+      "faithfulness": 0.8345,
+      "answer_relevancy": 0.8123,
+      "context_precision": 0.7789,
+      "context_recall": 0.7456,
+      "sample_count": 3
+    },
+    "negative": {
+      "faithfulness": 0.8678,
+      "answer_relevancy": 0.8456,
+      "context_precision": 0.8012,
+      "context_recall": 0.7789,
+      "sample_count": 4
+    },
+    "adversarial": {
+      "faithfulness": 0.7234,
+      "answer_relevancy": 0.7012,
+      "context_precision": 0.6789,
+      "context_recall": 0.6456,
+      "sample_count": 3
+    },
+    "out_of_scope": {
+      "faithfulness": 0.8456,
+      "answer_relevancy": 0.8234,
+      "context_precision": 0.7890,
+      "context_recall": 0.7345,
+      "sample_count": 2
+    },
+    "ambiguous": {
+      "faithfulness": 0.7789,
+      "answer_relevancy": 0.7567,
+      "context_precision": 0.7123,
+      "context_recall": 0.6890,
+      "sample_count": 2
+    },
+    "technical": {
+      "faithfulness": 0.8234,
+      "answer_relevancy": 0.8012,
+      "context_precision": 0.7678,
+      "context_recall": 0.7345,
+      "sample_count": 3
+    }
+  },
+  "remaining_failures": [
+    {
+      "question_id": "q021",
+      "category": "adversarial",
+      "issue": "faithfulness",
+      "score": 0.5500,
+      "diagnosis": "False premise handling improved but not fully resolved. LLM now partially corrects the false claim but still affirms parts of it. Requires input guardrails to fully fix — not a retrieval problem."
+    },
+    {
+      "question_id": "q026",
+      "category": "ambiguous",
+      "issue": "answer_relevancy",
+      "score": 0.5890,
+      "diagnosis": "HyDE generated a hypothesis focused on shipping — better than baseline but still misses other timeframe interpretations. Ambiguous queries need query expansion, not just better retrieval."
+    }
+  ]
+}
